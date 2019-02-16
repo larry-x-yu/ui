@@ -21,55 +21,26 @@ class App extends Component {
       total: 100,
       PickupSavings: -3.85,
       taxes: 0,
-      estimatedTotal: 0,
-      disableButton: false
-
+      estimatedTotal: 0
     };
   }
 
   componentDidMount = () => {
-    this.setState({
-      taxes: (this.state.total + this.state.PickupSavings)*0.0875
-    },
-    () => {
-      this.setState({
-        estimatedTotal: this.state.total + this.state.PickupSavings + this.state.taxes
-      })
-    }
-    );
-  }
-
-  giveDiscountHandler = () => {
-    if(this.props.promoCode==='DISCOUNT') {
-      this.setState({
-        estimatedTotal: this.state.estimatedTotal * 0.9
-      },
-      function() {
-        this.setState({
-          disableButton: true
-        });
-      }
-      );
-    }
   }
 
   render() {
     return (
     <div className = 'container' >
       <Container className = 'purchase-card' >
-      <Subtotal price = {
-        this.state.total.toFixed(2)
-      }/>
+      <Subtotal />
 
-      <PickupSavings price = {
-        this.state.PickupSavings
-      }/>
-      <TaxesFees taxes={this.state.taxes.toFixed(2)}/>
+      <PickupSavings />
+      <TaxesFees />
       <hr/>
-      <EstimatedTotal price={this.state.estimatedTotal.toFixed(2)}/>
-      <ItemDetails price={this.state.estimatedTotal.toFixed(2)}/>
+      <EstimatedTotal />
+      <ItemDetails />
       <hr/>
-      <PromoCode isDisabled={this.state.disableButton} giveDiscount={()=>this.giveDiscountHandler()}/>
+      <PromoCode />
       </Container>
       </div>
     );

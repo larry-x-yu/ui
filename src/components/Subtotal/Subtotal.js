@@ -1,19 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 
-const mapStateToPromps = state=>({price: state.price});
+const mapStateToProps = state=>({price: state.total});
 
-class Subtotal extends Component {
-  render() {
+const Subtotal= props => {
     return (
       <Row className='show-grid'>
         <Col md={6}>Subtotal</Col>
-        <Col md={6}>{`$${this.props.price}`}</Col>
+        <Col md={6}>{`$${props.price}`}</Col>
       </Row>
     )
-  }
 }
 
-export default connect(mapStateToPromps, null)(Subtotal);
+export default connect(mapStateToProps)(Subtotal);

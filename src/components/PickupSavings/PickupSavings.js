@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Row, Col, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import {connect} from 'react-redux';
 
@@ -16,8 +16,7 @@ const mapStateToProps = state=>(
     {pickupSavings: state.pickupSavings}
 );
 
-class PickupSavings extends Component {
-  render() {
+const PickupSavings = props => {
       const tooltip=(<Tooltip id='tooltip'>
       <p>Picking up your order in the store helps cut costs, and we pass the savings to you. </p>
       </Tooltip>);
@@ -32,11 +31,10 @@ class PickupSavings extends Component {
                 </OverlayTrigger>
             </Col>
             <Col style={styles.totalSavings} md={6}>
-            {`$${this.props.pickupSavings}`}
+            {`$${props.pickupSavings}`}
             </Col>
         </Row>
     )
-  }
-}
+};
 
-export default connect(mapStateToProps, null)(PickupSavings);
+export default connect(mapStateToProps)(PickupSavings);

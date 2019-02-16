@@ -1,8 +1,8 @@
 import { PROMO_CODE } from './types';
 
-export const handleChange = e => dispatch=>{
+export const applyPromoCode = promoCode => dispatch=>{
     dispatch({
         type: PROMO_CODE,
-        payload: e.target.value
+        payload: promoCode
     });
 }

@@ -9,20 +9,26 @@ import {
 } from 'react-bootstrap';
 
 import {connect} from 'react-redux';
-import {handleChange} from '../../actions/promoCodeActions';
+import { applyPromoCode } from '../../actions/promoCodeActions';
 
 class PromoCode extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            open:false
+            open:false,
+            disabled: false,
+            promoCode: ''
         }
     }
 
-    handleChange = e=>{
-        this.props.handleChange(e);
+    handleBlur = e=>{
+        this.setState({promoCode: e.target.value});
     }
 
+    applyDiscount = () => {
+        this.props.applyPromoCode(this.state.promoCode);
+        this.setState({disabled: true});
+    }
 
   render() {
     return (
@@ -47,7 +53,7 @@ class PromoCode extends Component {
                                             <Form.Control
                                                 type='text'
                                                 placeholder='Enter promo code'
-                                                onChange={this.handleChange}
+                                                onBlur={this.handleBlur}
                                             >
                                             </Form.Control>
                                         </Form.Group>
@@ -55,8 +61,8 @@ class PromoCode extends Component {
                                             block
                                             variant='primary'
                                             className='btn-round'
-                                            disabled={this.props.isDisabled}
-                                            onClick={this.props.giveDiscount}
+                                            disabled={this.state.disabled}
+                                            onClick={this.applyDiscount}
                                         >
                                         Apply
                                         </Button>
@@ -71,5 +77,4 @@ class PromoCode extends Component {
   }
 }
 
-const mapStateToProps = state => {};
-export default connect( null, {handleChange})(PromoCode);
+export default connect( null, {applyPromoCode})(PromoCode);

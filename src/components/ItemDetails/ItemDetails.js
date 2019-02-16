@@ -16,8 +16,9 @@ class ItemDetails extends Component {
 
   render() {
       let totalPrice = (this.props.total + this.props.pickupSavings) * (1 + this.props.taxRate);
+      let discountedPrice = totalPrice;
       if(this.props.promoCode==='DISCOUNT') {
-          totalPrice *= 0.9;
+        discountedPrice *= 0.9;
       }
 
     return (
@@ -44,7 +45,7 @@ class ItemDetails extends Component {
                                     <p className='media-body-text'>Essentials by OFM ESS=3085 Racing Style Leather Gaming Chair, Red</p>
                                     <Row>
                                     <Col md={6}>
-                                    <strong>{`$${this.props.price}`}</strong>
+                                    <strong>{`$${discountedPrice.toFixed(2)}`}</strong>
                                     <br/>
                                     <strong className='price-strike'>{`$${totalPrice.toFixed(2)}`}</strong>
                                     </Col>
@@ -62,4 +63,4 @@ class ItemDetails extends Component {
   }
 }
 
-export default connect(mapStateToProps, null)(ItemDetails);
+export default connect(mapStateToProps)(ItemDetails);
